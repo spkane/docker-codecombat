@@ -1,24 +1,25 @@
-# Project: docker codecombat base image
+# Project: docker codecombat db image
 # Author: Sébastien Moratinos <codecombat@sebastien-moratinos.com>
 # Date: 2014
 # usage:
 #	make build	- build new image from Dockerfile
-#	make debug	- run already created image by tag
+#	make debug	- debug run already created image by tag
+#	make try	- build and run in debug mode
 
 
-NAME=smoratinos/codecombat-base
+NAME=smoratinos/codecombat-db
 VERSION=0.1
+CONTAINER_NAME=codecombat-db
 SSH_PORT=23
+DB_PORT=27017
+DATA_DIR="/data/db/coco/"
 
 
 build:
 	docker build -t $(NAME):$(VERSION) .
 
 run:
-	docker run -p $(SSH_PORT):22 -t -i $(NAME):$(VERSION)
-
-debug: build
-	docker run -p $(SSH_PORT):22 -t -i $(NAME):$(VERSION) /bin/bash
+	mkdir -p $(DATA_DIR) && docker run --rm --name $(CONTAINER_NAME) -p $(DB_PORT):27017 -p $(SSH_PORT):22 -v $(DATA_DIR):/data/db -t -i $(NAME):$(VERSION)
 
 tag:
 	git tag -d $(VERSION) 2>&1 > /dev/null
