@@ -15,11 +15,6 @@ RUN \
   mkdir -p /data/db
 EXPOSE 27017
 
-
-ADD files/install.sh /home/coco/install.sh
-ADD files/start.sh /home/coco/start.sh
-RUN \
-  chmod +x /home/coco/start.sh && \
-  chmod +x /home/coco/install.sh
+ADD restore.sh /root/restore.sh
 
 CMD ["/usr/bin/supervisord"]

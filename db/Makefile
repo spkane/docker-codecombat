@@ -21,6 +21,12 @@ build:
 run:
 	mkdir -p $(DATA_DIR) && docker run --rm --name $(CONTAINER_NAME) -p $(DB_PORT):27017 -p $(SSH_PORT):22 -v $(DATA_DIR):/data/db -t -i $(NAME):$(VERSION)
 
+debug:
+	mkdir -p $(DATA_DIR) && docker run --rm --name $(CONTAINER_NAME) -p $(DB_PORT):27017 -p $(SSH_PORT):22 -v $(DATA_DIR):/data/db -t -i $(NAME):$(VERSION) /bin/bash
+
+restore:
+	mkdir -p $(DATA_DIR) && docker run --rm --name $(CONTAINER_NAME) -p $(DB_PORT):27017 -p $(SSH_PORT):22 -v $(DATA_DIR):/data/db -t -i $(NAME):$(VERSION) /bin/bash /root/restore.sh
+
 tag:
 	git tag -d $(VERSION) 2>&1 > /dev/null
 	git tag -d latest 2>&1 > /dev/null
@@ -30,8 +36,8 @@ tag:
 ssh:
 	@ID=$$(docker ps | grep -F "$(NAME):$(VERSION)" | awk '{ print $$1 }') && \
 		if test "$$ID" = ""; then echo "Container is not running."; exit 1; fi && \
-		IP=$$(docker inspect $$ID | grep IPAddr | sed 's/.*: "//; s/".*//') && \
+		IP=$$(docker inspect $$ID | grep Gateway | sed 's/.*: "//; s/".*//') && \
 		echo "SSHing into $$IP" && \
 		ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no root@$$IP -p $(SSH_PORT)
 
-.PHONY: build run debug ssh tag
+.PHONY: build run restore ssh tag debug

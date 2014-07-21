@@ -23,64 +23,27 @@ Linux Users : Install docker
 Windows and Mac Users : Install a Linux in Vagrant and install Docker in your Virtual Machine
 
 
-Base image
---------------
-
-Simple "ubuntu:14.04" image.
-
-Use supervisord to manage multiple process.
-
-Install open-ssh and expose port 22.
-
-Create a user "coco"
-
-You can build codecombat-base image by executing : 
-
-```sh
-make build
-```
-
-Override default configuration in the Makefile: 
-- name : smoratinos/codecombat-base
-
-You can run (for testing purpose) a container with the codecombat-base image by executing : 
-
-```sh
-make run
-```
-
-Override default configuration in the Makefile: 
-- container ssh port : 22 (set in the Dockerfile)
-- host ssh port : 23
-
-
 DB image
 --------------
 
-Use smoratinos/codecombat-base image.
 
-Install mongodb and expose port 27017.
-
-You can build codecombat-db image by executing : 
+Build codecombat-db image : 
 
 ```sh
 make build
 ```
 
-Override default configuration in the Makefile: 
-- name : smoratinos/codecombat-db
+Restore a db snapshot : 
 
-You can run a container with the codecombat-db image by executing : 
+```sh
+make restore
+```
+
+Run a container : 
 
 ```sh
 make run
 ```
-Override default configuration in the Makefile: 
-- container mongodb port : 27017 (set in the Dockerfile)
-- host mongodb port : 27017
-- container name :codecombat-db
-- container data directory : /data/db (mongodb data)
-- host data directory : /data/db/coco/
 
 WebServer image
 --------------
