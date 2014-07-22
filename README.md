@@ -13,6 +13,8 @@ If you don't know Docker, you should prefer use [official dev env setup] (https:
 You must use a codecombat-db container to store data in the db.
 And you must use a codecombat-web container to serve the source files and expose a nodejs web server. 
 
+![](./big_picture.svg?raw=true)
+
 Dependencies
 --------------
 
