@@ -19,13 +19,16 @@ build:
 	docker build -t $(NAME):$(VERSION) .
 
 run:
-	mkdir -p $(DATA_DIR) && docker run --rm --name $(CONTAINER_NAME) -p $(DB_PORT):27017 -p $(SSH_PORT):22 -v $(DATA_DIR):/data/db -t -i $(NAME):$(VERSION)
+	mkdir -p $(DATA_DIR)
+	docker run --rm --name $(CONTAINER_NAME) -p $(DB_PORT):27017 -p $(SSH_PORT):22 -v $(DATA_DIR):/data/db -t -i $(NAME):$(VERSION)
 
 debug:
-	mkdir -p $(DATA_DIR) && docker run --rm --name $(CONTAINER_NAME) -p $(DB_PORT):27017 -p $(SSH_PORT):22 -v $(DATA_DIR):/data/db -t -i $(NAME):$(VERSION) /bin/bash
+	mkdir -p $(DATA_DIR)
+	docker run --rm --name $(CONTAINER_NAME) -p $(DB_PORT):27017 -p $(SSH_PORT):22 -v $(DATA_DIR):/data/db -t -i $(NAME):$(VERSION) /bin/bash
 
 restore:
-	mkdir -p $(DATA_DIR) && docker run --rm --name $(CONTAINER_NAME) -p $(DB_PORT):27017 -p $(SSH_PORT):22 -v $(DATA_DIR):/data/db -t -i $(NAME):$(VERSION) /bin/bash /root/restore.sh
+	mkdir -p $(DATA_DIR)
+	docker run --rm --name $(CONTAINER_NAME) -p $(DB_PORT):27017 -p $(SSH_PORT):22 -v $(DATA_DIR):/data/db -t -i $(NAME):$(VERSION) /bin/bash /root/restore.sh
 
 tag:
 	git tag -d $(VERSION) 2>&1 > /dev/null

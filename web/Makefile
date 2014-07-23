@@ -20,13 +20,16 @@ build:
 	docker build -t $(NAME):$(VERSION) .
 
 run:
-	mkdir -p $(APP_DIR) && docker run --rm --link $(DB_CONTAINER_NAME):dbhost --name $(CONTAINER_NAME) -p $(WEB_PORT):3000 -p $(SSH_PORT):22 -v $(APP_DIR):/opt/codecombat/ -t -i $(NAME):$(VERSION)
+	mkdir -p $(APP_DIR)
+	docker run --rm --link $(DB_CONTAINER_NAME):dbhost --name $(CONTAINER_NAME) -p $(WEB_PORT):3000 -p $(SSH_PORT):22 -v $(APP_DIR):/opt/codecombat/ -t -i $(NAME):$(VERSION)
 
 debug:
-	mkdir -p $(APP_DIR) && docker run --rm --link $(DB_CONTAINER_NAME):dbhost --name $(CONTAINER_NAME) -p $(WEB_PORT):3000 -p $(SSH_PORT):22 -v $(APP_DIR):/opt/codecombat/ -t -i $(NAME):$(VERSION) /bin/bash
+	mkdir -p $(APP_DIR)
+	docker run --rm --link $(DB_CONTAINER_NAME):dbhost --name $(CONTAINER_NAME) -p $(WEB_PORT):3000 -p $(SSH_PORT):22 -v $(APP_DIR):/opt/codecombat/ -t -i $(NAME):$(VERSION) /bin/bash
 
 install:
-	mkdir -p $(APP_DIR) && docker run --rm --name $(CONTAINER_NAME) -p $(WEB_PORT):3000 -p $(SSH_PORT):22 -v $(APP_DIR):/opt/codecombat/ -t -i $(NAME):$(VERSION) /bin/bash /root/install.sh
+	mkdir -p $(APP_DIR)
+	docker run --rm --name $(CONTAINER_NAME) -p $(WEB_PORT):3000 -p $(SSH_PORT):22 -v $(APP_DIR):/opt/codecombat/ -t -i $(NAME):$(VERSION) /bin/bash /root/install.sh
 
 tag:
 	git tag -d $(VERSION) 2>&1 > /dev/null

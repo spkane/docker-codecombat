@@ -35,7 +35,7 @@ RUN chmod +x /root/install.sh
 ADD start.sh /root/start.sh
 RUN chmod +x /root/start.sh
 
-ENV COCO_DB_HOST dbhost
+ENV COCO_MONGO_HOST dbhost
 ENV NODE_ENV development
 
 EXPOSE 3000
