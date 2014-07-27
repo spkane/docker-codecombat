@@ -10,9 +10,9 @@
 #	make ssh-db     	- connect via ssh to db container
 #	make ssh-web     	- connect via ssh to web container
 
-DB_CONTAINER_NAME=codecombat-db
+DB_CONTAINER_NAME=smoratinos/codecombat-db
 DB_SSH_PORT=23
-WEB_CONTAINER_NAME=codecombat-web
+WEB_CONTAINER_NAME=smoratinos/codecombat-web
 WEB_SSH_PORT=24
 
 pull-docker:

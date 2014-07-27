@@ -8,7 +8,7 @@
 
 
 NAME=smoratinos/codecombat-db
-VERSION=0.1
+VERSION=latest
 CONTAINER_NAME=codecombat-db
 SSH_PORT=23
 DB_PORT=27017
