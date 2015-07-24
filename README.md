@@ -57,7 +57,7 @@ You can now run app and modify source code as needed.
 
 In a terminal run db container
 ```sh
-cd web && make run
+cd db && make run
 ```
 
 Ouput expected : 
